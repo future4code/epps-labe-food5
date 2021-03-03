@@ -1,40 +1,96 @@
-import styled from 'styled-components'
+import styled from "styled-components";
+import { Box, Container, FormControl } from "@material-ui/core";
 
-export const Title = styled.div`
-//  border: 1px solid black; 
-// font-size: 30px;
-// width: 120px;
-// background: -webkit-linear-gradient(
-//     RGB(0,0,0) 50%,
-//     RGB(92, 182, 70) 50%
-//   );
-//   -webkit-background-clip: text;
-//   -webkit-text-fill-color: transparent;
-`
+export const MainContainer = styled(Container)`
+  width: 100vw;
+  max-width: 360px;
+  height: 640px;
+  display: flex;
+  justify-content: center;
+`;
 
-export const ContainerInput = styled.div`
-width: 398px;
-margin-bottom: 12px;
-margin-top: 12px;
-@media (max-width: 736px) {
-    width: 143%;
-    margin-bottom: 10px;
-    margin-top: 15px;
-   } ;
-`
-export const LogoTitle = styled.img`
-margin-top: 1vh;
-margin-bottom: 30px;
-heigth: 104px;
-    width: 158px;
-  @media (min-width: 500px) and (max-width: 800px) {
-    margin: 40vh;
-    heigth: 150px;
-    width: 126px;
-   }
-   @media (max-width: 499px) {
-    margin-top: 5px;
-     heigth: 65px;
-     width: 126px;
-   } ;
+export const Header = styled.header`
+  width: 100vw;
+  max-width: 360px;
+  height: 64px;
+  --webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0.5px 0 0 rgba(0, 0, 0, 0.25);
+  background-color: #ffffff;
+`;
+
+export const IconBox = styled.img`
+  width: 23px;
+  max-width: 360px;
+  height: 24px;
+  padding-top: 30px;
+  object-fit: contain;
+`;
+
+export const MainBox = styled(Box)`
+  width: 360px;
+  max-width: 360px;
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+`;
+
+export const LogoBox = styled.img`
+  width: 300px;
+  max-width: 360px;
+  height: 58px;
+  object-fit: contain;
+`;
+
+export const BoxFormTitle = styled(Box)`
+  width: 100vw;
+  max-width: 360px;
+  height: 42px;
+  display: flex;
+  justify-content: center;
+`;
+
+export const FormTitle = styled.h1`
+  width: 296px;
+  height: 18px;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.39px;
+  text-align: center;
+  color: #000000;
+`;
+
+export const Form = styled(FormControl)`
+  width: 100vw;
+  max-width: 360px;
+  height: 448px;
+  display: flex;
+  gap: 16px;
+`;
+
+export const BoxButton = styled(Box)`
+  width: 360px;
+  height: 42px;
+  display: flex;
+`;
+
+export const Button = styled.button`
+  width: 328px;
+  height: 42px;
+  border: none;
+  border-radius: 2px;
+  background-color: #e8222e;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.39px;
+  text-align: center;
+  color: #000000;
 `

@@ -1,229 +1,131 @@
-import React, { useEffect, useState } from "react";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import { ContainerInput, Title,LogoTitle } from "../SignUp/styled";
-import { FormControl } from "@material-ui/core";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import React from "react";
+import {signup} from '../../services/apiRequest'
+import useForm from '../hooks/useForm'
+import { useHistory } from 'react-router-dom';
+
 import {
-  InputLabel,
-  InputAdornment,
-  IconButton,
-  OutlinedInput,
-} from "@material-ui/core";
-import clsx from "clsx";
-import Logo from "../img/logo.png"
+  MainContainer,
+  Header,
+  IconBox,
+  MainBox,
+  LogoBox,
+  BoxFormTitle,
+  FormTitle,
+  Form,
+  BoxButton,
+  Button,
+} from "./styled";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" >
-        4Food Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import backArrow from "../img/icons/back.png";
+import invertLogo from "../img/logo.png";
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%",
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+import { InputAdornment, TextField } from "@material-ui/core";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 
-export default function SingUpPage() {
+const SignUpPage = () => {
+  const [form, handleInputChange] = useForm({name:'', email: '', cpf:'', password: ''})
+  const history = useHistory()
 
-  //mudar para página de editar profile
-  const [token, setToken] = useState("")
-  useEffect(()=>{
-    setToken(localStorage.getItem("token"))
-  },[]) // provisório para teste
-
-  const classes = useStyles();
-  const [values, setValues] = React.useState({
-    password: "",
-    showPassword: false,
-  });
-  const [valuesConfirme, setValuesConfirme] = React.useState({
-    confirm: "",
-    showConfirm: false,
-  });
-
-  const [showText, setShowText] = useState(false);
-
-  const handleShowText = () => {
-    setShowText(!showText);
-  };
-
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
-  const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
-  const handleConfirmation = (prop) => (event) => {
-    setValuesConfirme({ ...valuesConfirme, [prop]: event.target.value });
-  };
-
-  
-  
+ const onClickSignUp= (event) => {
+    event.preventDefault()
+    signup (form, history)
+    }
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        { !token && <Title>
-          <LogoTitle src={Logo} />
-          
-        </Title>}
-
-        <Typography component="h1" variant="h5">
-          {!token && "Cadastrar"}
-        </Typography>
-
-        <form className={classes.form} noValidate>
+    <form  onSubmit={onClickSignUp}>
+      <MainContainer>
+        <Header>
+          <IconBox src={backArrow} alt="icone de voltar para página anterior" />
+        </Header>
+        <MainBox>
+          <LogoBox src={invertLogo} alt="logo 4Food" />
+        </MainBox>
+        <BoxFormTitle>
+          <FormTitle>Cadastrar</FormTitle>
+        </BoxFormTitle>
+        <Form>
           <TextField
             variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="name"
+            value={form.name}
+            onChange={handleInputChange}
+            name={'name'}
+            required="true"
             label="Nome"
-            placeholder="Nome e sobrenome"
-            name="name"
-            pattern={"^.{3,}"}
-            title={"Mínimo 3 caracteres"}
-            autoComplete="name"
-            autoFocus
+            placeholder="Nome e Sobrenome"
+            style={{ width: "328px" }}
           />
           <TextField
             variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
+            value={form.email}
+            type={'email'}
+            onChange={handleInputChange}
+            name={'email'}
+            required="true"
             label="E-mail"
             placeholder="email@email.com"
-            name="email"
-            autoComplete="email"
-            autoFocus
+            style={{ width: "328px" }}
           />
+
           <TextField
             variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="CPF"
+            value={form.cpf}
+            onChange={handleInputChange}
+            name={'cpf'}
+            type={'cpf'}
+            required="true"
             label="CPF"
             placeholder="000.000.000-00"
-            name="CPF"
-            autoComplete="CPF"
-            autoFocus
+            style={{ width: "328px" }}
           />
 
-        { !token &&
-          <FormControl
-            className={clsx(classes.margin, classes.textField)}
+          <TextField
             variant="outlined"
-          >
-            <InputLabel htmlFor="outlined-adornment-password">Senha</InputLabel>
-            <ContainerInput>
-              <OutlinedInput
-                id="outlined-adornment-password"
-                required
-                fullWidth
-                name="password"
-                style={{ maxWidth: "1000px" }}
-                type={values.showPassword ? "text" : "password"}
-                value={values.password}
-                onChange={handleChange("password")}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-              />
-            </ContainerInput>
-          </FormControl>
-          }
+            value={form.password}
+            name={'password'}
+            onChange={handleInputChange}
+            type={'password'}
+            required="true"
+            label="Senha"
+            placeholder="Mínimo 6 caracteres"
+            style={{ width: "328px" }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Visibility style={{ color: "#b8b8b8" }} />
+                </InputAdornment>
+              ),
+            }}
+          />
 
-          { !token &&
-          <FormControl variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">
-              Confirmar Senha
-            </InputLabel>
-            <ContainerInput>
-              <OutlinedInput
-                id="outlined-adornment-password"
-                required
-                fullWidth
-                name="confirm"
-                type={showText ? "text" : "password"}
-                value={valuesConfirme.confirm}
-                onChange={handleConfirmation("confirm")}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleShowText}
-                      edge="end"
-                    >
-                      {showText ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-              />
-            </ContainerInput>
-          </FormControl>
-}
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Criar
-          </Button>
-        </form>
-      </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
-    </Container>
+          <TextField
+            variant="outlined"
+            value={form.password}
+            onChange={handleInputChange}
+            name={'password'}
+            type={'password'}
+            required="true"
+            label="Confirmar"
+            placeholder="Confirme a senha anterior"
+            style={{ width: "328px" }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <VisibilityOff style={{ color: "#b8b8b8" }} />
+                </InputAdornment>
+              ),
+            }}
+          />
+          <BoxButton>
+            <Button>
+              Criar
+              </Button>
+          </BoxButton>
+        </Form>
+      </MainContainer>
+    </form>
   );
-}
+};
+
+export default SignUpPage;
+
+
