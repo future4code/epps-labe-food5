@@ -5,3 +5,7 @@ export const goToLogin = (history) => {
 export const goToFeed = (history) => {
     history.push('/')
 }
+
+export const goToRestaurant = (history, restaurantId) => {
+        history.push(`/restaurant/${restaurantId}`)
+    }
