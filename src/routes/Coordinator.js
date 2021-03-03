@@ -3,9 +3,17 @@ export const goToLogin = (history) => {
 }
 
 export const goToFeed = (history) => {
-    history.push('/')
+    history.push('/feed')
 }
 
 export const goToRestaurant = (history, restaurantId) => {
         history.push(`/restaurant/${restaurantId}`)
+    }
+
+export const goToSignUp = (history) => {
+        history.push("/sign-up")
+    }
+
+    export const goToPerfil = (history)=>{
+        history.push('/perfil')
     }
