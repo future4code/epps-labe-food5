@@ -1,9 +1,14 @@
+<<<<<<< HEAD
 import React, { useState, useLayoutEffect } from 'react';
+=======
+import React from 'react';
+>>>>>>> 962947fe87435bb79b927e3a9f12d73064b31419
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+<<<<<<< HEAD
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -11,6 +16,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
+=======
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+>>>>>>> 962947fe87435bb79b927e3a9f12d73064b31419
 
 
 
@@ -34,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+<<<<<<< HEAD
 export default function ProfileUser() {
   const classes = useStyles();
   const history = useHistory()
@@ -51,6 +66,18 @@ export default function ProfileUser() {
 
   const onChangeName = (event) => {
   setName(event.target.value)
+=======
+export default function PofileUser() {
+  const classes = useStyles();
+  const history = useHistory()
+
+  const [email, setEmail] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [username, setUserName] = useState("")
+
+  const onChangeUserName = (event) => {
+  setUserName(event.target.value)
+>>>>>>> 962947fe87435bb79b927e3a9f12d73064b31419
   } 
     
   const onChangeEmail = (event) => {
@@ -94,6 +121,7 @@ export default function ProfileUser() {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
+<<<<<<< HEAD
 
       <div className={classes.paper}>
        
@@ -101,6 +129,16 @@ export default function ProfileUser() {
           Editar
         </Typography>
         <form onSubmit={onSubmitForm} className={classes.form} noValidate>
+=======
+      <div className={classes.paper}>
+        {/* <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar> */}
+        <Typography component="h1" variant="h5">
+          Editar
+        </Typography>
+        <form className={classes.form} noValidate>
+>>>>>>> 962947fe87435bb79b927e3a9f12d73064b31419
           <Grid container spacing={2}>
             <Grid item xs={12} >
               <TextField
@@ -109,11 +147,17 @@ export default function ProfileUser() {
                 variant="outlined"
                 required
                 fullWidth
+<<<<<<< HEAD
                 id="name"
                 label="Nome"
                 value={name}
                 autoFocus
                 onChange={onChangeName}
+=======
+                id="username"
+                label="Nome"
+                autoFocus
+>>>>>>> 962947fe87435bb79b927e3a9f12d73064b31419
               />
             </Grid>
             <Grid item xs={12}>
@@ -123,10 +167,15 @@ export default function ProfileUser() {
                 fullWidth
                 id="email"
                 label="Email"
+<<<<<<< HEAD
                 value={email} 
                 name="email"
                 autoComplete="email"
                 onChange={onChangeEmail}
+=======
+                name="email"
+                autoComplete="email"
+>>>>>>> 962947fe87435bb79b927e3a9f12d73064b31419
               />
             </Grid>
             <Grid item xs={12}>
@@ -136,11 +185,17 @@ export default function ProfileUser() {
                 fullWidth
                 name="Cpf"
                 label="Cpf"
+<<<<<<< HEAD
                 id="Cpf"
                 type="text"
                 value={cpf}
                 autoComplete="Cpf"
                 onChange={onChangeCpf}
+=======
+                type="text"
+                id="cpf"
+                autoComplete="Cpf"
+>>>>>>> 962947fe87435bb79b927e3a9f12d73064b31419
               />
             </Grid>
             <Grid item xs={12}>
