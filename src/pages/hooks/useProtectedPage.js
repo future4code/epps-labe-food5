@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { goToLogin, goToFeed } from "../routes/Coordinator";
+import { goToLogin, goToFeed } from "../../routes/Coordinator";
 
 const useProtectedPage = () => {
   const history = useHistory();

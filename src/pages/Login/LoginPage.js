@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { goToFeed, goToSignUp } from '../../routes/Coordinator';
+import React from "react";
+import { goToSignUp } from '../../routes/Coordinator';
 import LoginForm from './LoginForm';
 import { useHistory } from "react-router-dom";
 import { PageTextContainer } from "./styled";
