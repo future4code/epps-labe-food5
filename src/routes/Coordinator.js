@@ -2,7 +2,7 @@ export const goToLogin = (history) => {
     history.push('/login')
 }
 
-export const goToFeed = (history) => {
+export const goToFeedPage = (history) => {
     history.push('/feed')
 }
 
@@ -14,6 +14,14 @@ export const goToSignUp = (history) => {
         history.push("/sign-up")
     }
 
-    export const goToPerfil = (history)=>{
+export const goToPerfil = (history)=>{
+        history.push('/perfil')
+    }
+
+export const goToAdressPage = (history) => {
+        history.push ('/endereco')
+    }
+
+export const goToProfilePage = (history) =>{
         history.push('/perfil')
     }

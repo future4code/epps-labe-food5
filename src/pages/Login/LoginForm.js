@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom';
 import useForm from '../hooks/useForm';
 import Logo4Food from '../img/logo.png';
 import Visible from '../img/icons/senha-2.png';
-import Invisible from '../img/icons/senha.png';
 import { MainButton } from '../../components/button/mainButtonStyle';
 import { login } from '../../services/apiRequest'
 
