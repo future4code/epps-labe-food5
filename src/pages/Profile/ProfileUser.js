@@ -1,32 +1,16 @@
-<<<<<<< HEAD
-import React, { useState, useLayoutEffect } from 'react';
-=======
-import React from 'react';
->>>>>>> 962947fe87435bb79b927e3a9f12d73064b31419
+import React, { useState, useEffect, AsyncStorage  } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-<<<<<<< HEAD
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
-=======
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
->>>>>>> 962947fe87435bb79b927e3a9f12d73064b31419
-
-
+import { goToUsuario} from '../../routes/Coordinator';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -48,36 +32,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-<<<<<<< HEAD
 export default function ProfileUser() {
   const classes = useStyles();
   const history = useHistory()
-
-  const token = useLayoutEffect(() => {
-    if(localStorage.getItem("token") == null) {
-      alert("em token") //goToLogin(history)
-    }  
-    }, [])
-    console.log(token);
-
-  const [email, setEmail] = useState("");
-  const [cpf, setCpf] = useState("");
+    
   const [name, setName] = useState("")
-
-  const onChangeName = (event) => {
-  setName(event.target.value)
-=======
-export default function PofileUser() {
-  const classes = useStyles();
-  const history = useHistory()
-
   const [email, setEmail] = useState("");
   const [cpf, setCpf] = useState("");
-  const [username, setUserName] = useState("")
-
-  const onChangeUserName = (event) => {
-  setUserName(event.target.value)
->>>>>>> 962947fe87435bb79b927e3a9f12d73064b31419
+  
+  const onChangeName = (event) => {   
+  setName(event.target.value)
   } 
     
   const onChangeEmail = (event) => {
@@ -88,16 +52,12 @@ export default function PofileUser() {
         setCpf(event.target.value)
     }
     
-    const createUser = (event) => {
-        event.preventDefault();
-        const body = {
-            email: email,
-            cpf: cpf,
-            name: name,
-        };
-    }
-    
-    
+    const token = useEffect(() => {
+      if(localStorage.getItem("token") == null) {
+         goToUsuario(history)
+      }  
+      }, []) 
+  
     
     const onSubmitForm = (event) => {
       event.preventDefault();
@@ -106,10 +66,13 @@ export default function PofileUser() {
         email: email,
         cpf: cpf
       };
-    axios.put("https://us-central1-missao-newton.cloudfunctions.net/fourFoodB/profile", body,{headers:{auth:"token"}}            
+      console.log(body);
+
+    axios.put("https://us-central1-missao-newton.cloudfunctions.net/fourFoodB/profile",
+    body,{headers:{auth:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImliZHVaSW9Ta280U1pmaXRUTU5zIiwibmFtZSI6IkZyZWUgV2lsbGlhbSIsImVtYWlsIjoiZnJlZS53aWxsaWFtQGZ1dHVyZTQuY29tIiwiY3BmIjoiMTIzLjQ1Ni43ODktMDAiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiQXYuIEhvcsOhY2lvIExhZmVyLCA1MDAsIFZpdHJhIFRvd2VyIC0gSXRhaW0gQmliaSIsImlhdCI6MTYxNDc3MzIyOX0.L_efDQhyT2F6gXMNkTk005ijxG8l9YakIQYgp-idZYU"}}            
     ).then((response) => {
       window.localStorage.setItem("token", response.data.token);
-      history.push('/timeline')
+      history.push('/endereco')
       setName("")
       setEmail("")
       setCpf("")
@@ -121,7 +84,6 @@ export default function PofileUser() {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-<<<<<<< HEAD
 
       <div className={classes.paper}>
        
@@ -129,16 +91,6 @@ export default function PofileUser() {
           Editar
         </Typography>
         <form onSubmit={onSubmitForm} className={classes.form} noValidate>
-=======
-      <div className={classes.paper}>
-        {/* <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar> */}
-        <Typography component="h1" variant="h5">
-          Editar
-        </Typography>
-        <form className={classes.form} noValidate>
->>>>>>> 962947fe87435bb79b927e3a9f12d73064b31419
           <Grid container spacing={2}>
             <Grid item xs={12} >
               <TextField
@@ -147,17 +99,11 @@ export default function PofileUser() {
                 variant="outlined"
                 required
                 fullWidth
-<<<<<<< HEAD
                 id="name"
                 label="Nome"
                 value={name}
                 autoFocus
                 onChange={onChangeName}
-=======
-                id="username"
-                label="Nome"
-                autoFocus
->>>>>>> 962947fe87435bb79b927e3a9f12d73064b31419
               />
             </Grid>
             <Grid item xs={12}>
@@ -167,15 +113,10 @@ export default function PofileUser() {
                 fullWidth
                 id="email"
                 label="Email"
-<<<<<<< HEAD
                 value={email} 
                 name="email"
                 autoComplete="email"
                 onChange={onChangeEmail}
-=======
-                name="email"
-                autoComplete="email"
->>>>>>> 962947fe87435bb79b927e3a9f12d73064b31419
               />
             </Grid>
             <Grid item xs={12}>
@@ -185,17 +126,11 @@ export default function PofileUser() {
                 fullWidth
                 name="Cpf"
                 label="Cpf"
-<<<<<<< HEAD
                 id="Cpf"
                 type="text"
                 value={cpf}
                 autoComplete="Cpf"
                 onChange={onChangeCpf}
-=======
-                type="text"
-                id="cpf"
-                autoComplete="Cpf"
->>>>>>> 962947fe87435bb79b927e3a9f12d73064b31419
               />
             </Grid>
             <Grid item xs={12}>

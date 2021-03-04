@@ -5,3 +5,11 @@ export const goToLogin = (history) => {
 export const goToFeed = (history) => {
     history.push('/')
 }
+
+export const goToEndereco = (history) => {
+    history.push('/endereco')
+}
+
+export const goToUsuario = (history) => {
+    history.push('/usuario')
+}

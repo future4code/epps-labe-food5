@@ -3,9 +3,9 @@ import axios from 'axios'
 import TextField from '@material-ui/core/TextField';
 import { Button, ThemeProvider } from '@material-ui/core';
 import { Campo, Div, FormAddre, H3, theme,ScreenContainer } from './AddressStyle';
-//import { goToFeed, goToLogin } from '../../../Routers/Cordinators';
+import { goToFeed } from '../../routes/Coordinator';
 import { useHistory } from 'react-router-dom'
-//import useProtectedPage from '../../../hooks/useProtectedPage';
+//import useProtectedPage from '../hooks/useProtectedPage';
 
 
 const ProfileAddress = () => {
@@ -14,7 +14,7 @@ const ProfileAddress = () => {
     //validação do usuário por meio do token//  
     useLayoutEffect(() => {
         if(localStorage.getItem("token") == null){
-            alert("sem token" )// goToLogin(history) PRECISO DO ROUTER FUNCIONANDO
+          goToFeed(history)
         }
       }, [])
 
@@ -42,7 +42,7 @@ const ProfileAddress = () => {
         if(valido){
                 axios.put(`https://us-central1-missao-newton.cloudfunctions.net/fourFoodB/address`,form,{
                     headers:{
-                               auth: localStorage.getItem('token')
+                               auth: localStorage.getItem('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImliZHVaSW9Ta280U1pmaXRUTU5zIiwibmFtZSI6IkZyZWUgV2lsbGlhbSIsImVtYWlsIjoiZnJlZS53aWxsaWFtQGZ1dHVyZTQuY29tIiwiY3BmIjoiMTIzLjQ1Ni43ODktMDAiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiQXYuIEhvcsOhY2lvIExhZmVyLCA1MDAsIFZpdHJhIFRvd2VyIC0gSXRhaW0gQmliaSIsImlhdCI6MTYxNDc3MzIyOX0.L_efDQhyT2F6gXMNkTk005ijxG8l9YakIQYgp-idZYU')
                            }
                }).then((Response)=> {
                 localStorage.setItem("token", Response.data.token)   
@@ -56,11 +56,13 @@ const ProfileAddress = () => {
     
      return (
         <Div>
-            <ScreenContainer>            
+              <ScreenContainer>            
                 <form id="form-enderec" style={{width: '90%'}}>
                     <H3>Meu Endereço</H3>
                         <FormAddre>
+                        
                             <Campo>
+                                         
                                 <TextField
                                     required
                                     id="id-street"
@@ -71,12 +73,11 @@ const ProfileAddress = () => {
                                     onChange={newAddress}
                                     type="text"
                                     variant="outlined"
-                                    fullWidth
-                                    size="normal"
+                                    fullWidth                                    
                                     InputLabelProps={{
                                         shrink: true,
                                         }}
-                                />
+                                />                                
                             </Campo>
                             <Campo>
                                 <TextField
@@ -94,8 +95,24 @@ const ProfileAddress = () => {
                                         shrink: true,
                                         }}
                                 />
+                            </Campo> 
+
+                            <Campo>
+                                <TextField
+                                    id="complement-log"
+                                    label="Complemento"
+                                    placeholder="Apto./Bloco"
+                                    name="complement"
+                                    value={form.complement}
+                                    onChange={newAddress}
+                                    variant="outlined"
+                                    fullWidth
+                                    InputLabelProps={{
+                                    shrink: true,
+                                    }}                                    
+                                />
                             </Campo>
-                            
+                                                       
                             <Campo>
                                 <TextField
                                     required
@@ -111,9 +128,7 @@ const ProfileAddress = () => {
                                         shrink: true,
                                         }}
                                 />
-                            </Campo>
-
-                            
+                            </Campo>                            
                             <Campo>
                                 <TextField
                                     required
@@ -124,7 +139,7 @@ const ProfileAddress = () => {
                                     value={form.city}
                                     onChange={newAddress}
                                     variant="outlined"
-                                    fullWidth
+                                    fullWidth                              
                                     InputLabelProps={{
                                         shrink: true,
                                         }}
@@ -145,23 +160,7 @@ const ProfileAddress = () => {
                                     shrink: true,
                                     }}                                    
                                 />
-                            </Campo>
-
-                            <Campo>
-                                <TextField
-                                    id="complement-log"
-                                    label="Complemento"
-                                    placeholder="Apto./Bloco"
-                                    name="complement"
-                                    value={form.complement}
-                                    onChange={newAddress}
-                                    variant="outlined"
-                                    fullWidth
-                                    InputLabelProps={{
-                                    shrink: true,
-                                    }}                                    
-                                />
-                            </Campo>
+                            </Campo>                            
                             <Campo>
                                 <ThemeProvider theme={theme}>
                                     <Button 
@@ -169,13 +168,14 @@ const ProfileAddress = () => {
                                         fullWidth
                                         variant="contained" 
                                         color="primary" 
-                                        disableElevation
+                                       
                                     >Salvar</Button>
                                 </ThemeProvider>
                             </Campo>
+                        
                         </FormAddre>    
                 </form>
-                </ScreenContainer>
+              </ScreenContainer>
       </Div>
     )
 }
