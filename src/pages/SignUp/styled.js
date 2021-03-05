@@ -114,5 +114,5 @@ export const InputsContainer = styled.div`
   align-items: center;
   margin-top: 20px;
   padding-top: 30px;
-  
 ` 
+
