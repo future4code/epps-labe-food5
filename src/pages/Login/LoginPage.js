@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { goToFeed, goToSignUp } from '../../routes/Coordinator';
 import LoginForm from './LoginForm';

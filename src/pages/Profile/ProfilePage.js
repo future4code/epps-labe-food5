@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
-import { ThemeProvider } from '@material-ui/core'
-import theme from './StyledTheme'
 import axios from 'axios'
-import {Div, InfoDados, Pen, Header, AddressContainer, UserContainer, AddressSection, TextAddress, StreetAddress, HistoricRequests, ScreenContainer, Li} from './PageStyled'
-
-
-
+import {Div, Boton, InfoDados, Pen, Header, AddressContainer, UserContainer, AddressSection, TextAddress, StreetAddress, HistoricRequests, ScreenContainer, Li} from './PageStyled'
+import { useHistory } from 'react-router-dom'
 
 const Profile = () => {
+    const history = useHistory();
     // AQUI DEVERIA VIR PROTECT PAGE
     const [user, setUser] = useState ({})
     const [address, setAddress] = useState ('')
@@ -17,7 +13,7 @@ const Profile = () => {
         const getUser = () =>{
             axios.get('https://us-central1-missao-newton.cloudfunctions.net/fourFoodB/profile', {
                 headers: {
-                    auth:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImliZHVaSW9Ta280U1pmaXRUTU5zIiwibmFtZSI6IkZyZWUgV2lsbGlhbSIsImVtYWlsIjoiZnJlZS53aWxsaWFtQGZ1dHVyZTQuY29tIiwiY3BmIjoiMTIzLjQ1Ni43ODktMDAiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiQXYuIEhvcsOhY2lvIExhZmVyLCA1MDAsIFZpdHJhIFRvd2VyIC0gSXRhaW0gQmliaSIsImlhdCI6MTYxNDc3MzIyOX0.L_efDQhyT2F6gXMNkTk005ijxG8l9YakIQYgp-idZYU"
+                    auth: localStorage.getItem("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImliZHVaSW9Ta280U1pmaXRUTU5zIiwibmFtZSI6IkZyZWUgV2lsbGlhbSIsImVtYWlsIjoiZnJlZS53aWxsaWFtQGZ1dHVyZTQuY29tIiwiY3BmIjoiMTIzLjQ1Ni43ODktMDAiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiQXYuIEhvcsOhY2lvIExhZmVyLCA1MDAsIFZpdHJhIFRvd2VyIC0gSXRhaW0gQmliaSIsImlhdCI6MTYxNDc3MzIyOX0.L_efDQhyT2F6gXMNkTk005ijxG8l9YakIQYgp-idZYU")
                 }
             }).then(response => {
                 setUser(response.data.user)
@@ -44,7 +40,7 @@ const Profile = () => {
                     <Li>Email: { user.email } </Li>
                     <Li>Cpf: { user.cpf } </Li>
                     </InfoDados>
-                    <Pen>                     
+                    <Pen Boton onClick = {() => history.push('/user')} >                    
                     </Pen>                                
                 </UserContainer>
 
@@ -53,7 +49,9 @@ const Profile = () => {
                     <TextAddress>Endereço Cadastrado</TextAddress>
                     <StreetAddress> Palacio Guanabara</StreetAddress>                    
                 </AddressSection>
-                <Pen />  
+                <Pen Boton onClick = {() => history.push('/address')} >
+                    
+                </Pen>  
                 </AddressContainer> 
                   
                    

@@ -10,7 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
-import { goToUsuario} from '../../routes/Coordinator';
+import { goToProfile} from '../../routes/Coordinator';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -54,7 +54,7 @@ export default function ProfileUser() {
     
     // const token = useEffect(() => {
     //   if(localStorage.getItem("token") == null) {
-    //      goToUsuario(history)
+    //      goToUser(history)
     //   }  
     //   }, []) 
   
@@ -72,11 +72,11 @@ export default function ProfileUser() {
     body,{headers:{auth:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImliZHVaSW9Ta280U1pmaXRUTU5zIiwibmFtZSI6IkZyZWUgV2lsbGlhbSIsImVtYWlsIjoiZnJlZS53aWxsaWFtQGZ1dHVyZTQuY29tIiwiY3BmIjoiMTIzLjQ1Ni43ODktMDAiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiQXYuIEhvcsOhY2lvIExhZmVyLCA1MDAsIFZpdHJhIFRvd2VyIC0gSXRhaW0gQmliaSIsImlhdCI6MTYxNDc3MzIyOX0.L_efDQhyT2F6gXMNkTk005ijxG8l9YakIQYgp-idZYU"}}            
     ).then((response) => {
       window.localStorage.setItem("token", response.data.token);
-      history.push('/endereco')
+      history.push('/profile')
       setName("")
       setEmail("")
       setCpf("")
-      alert("Usuário logado com êxito");
+      alert("Dados alterados comsucesso");
 
     }).catch((error) => alert(error.response.data.message))
     };
