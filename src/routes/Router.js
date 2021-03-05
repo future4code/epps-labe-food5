@@ -9,27 +9,31 @@ import ProfileAddress from '../pages/Profile/ProfileAddress'
 import ProfileUser from '../pages/Profile/ProfileUser'
 import ProfilePage from '../pages/Profile/ProfilePage'
 
+//import GlobalState from '../global/GlobalState'
 
 const Router = () => {
     return (
         <BrowserRouter>
             <Switch>
+                <Route exact path={'/'}>
+                    <LoginPage/>
+                </Route>
                 <Route exact path={'/login'}>
                     <LoginPage/>
                 </Route>
                 <Route exact path={'/signUp'}>
                     <SignUpPage />
                 </Route>
-                <Route exact path={'/perfil'}>
+                <Route exact path={'/profile'}>
                     <ProfilePage />
                 </Route>
-                <Route exact path={'/usuario'}>
+                <Route exact path={'/user'}>
                     <ProfileUser />
                 </Route>
-                <Route exact path={'/endereco'}>
+                <Route exact path={'/address'}>
                     <ProfileAddress />
                 </Route>
-                <Route exact path={'/'}>
+                <Route exact path={'/feed'}>
                     <FeedPage />
                 </Route>
                 <Route exact path={'/restaurant/:restaurantId'}>
@@ -38,6 +42,7 @@ const Router = () => {
                 <Route>
                     <ErrorPage />
                 </Route>
+                
             </Switch>
         </BrowserRouter>
     )

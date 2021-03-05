@@ -113,3 +113,11 @@ justify-self: center;
 grid-column: 2/2;
 grid-row: 1/2;
 `
+
+export const InputConfirmContainer = styled.form`
+`
+
+export const InputCpfContainer = styled.form`
+`
+export const InputNameContainer = styled.form`
+`
