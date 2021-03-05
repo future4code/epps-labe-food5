@@ -44,19 +44,17 @@ export default function FeedPage() {
 //     }, [])  
     
 
-    return (
-        <div>
-        {states.restaurants.map((restaurants) => {
-            return (
-                <RestaurantCard
-                    key={restaurants.id}
-                    restaurantId={restaurants.id}
-                    restaurants={restaurants}
-                />
-            )
-        })}
-        </div>
-    )
+//     return (
+//         <div>
+//         {states.restaurants.map((restaurants) => {
+//             return (
+//                 <RestaurantCard
+//                     key={restaurants.id}
+//                     restaurantId={restaurants.id}
+//                     restaurants={restaurants}
+//                 />
+//             )
+//         })}
+//         </div>
+//     )
 }
-
-export default FeedPage
