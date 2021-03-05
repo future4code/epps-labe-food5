@@ -94,3 +94,25 @@ export const Button = styled.button`
   text-align: center;
   color: #000000;
 `
+
+export const InputLabel = styled.div`
+position: absolute;
+top: -8px;
+border: none;
+width: 78px;
+left: 12px;
+font-size: 12px;
+color: black;
+background-color: white;
+padding-left: 4px;
+`
+
+export const InputsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+  margin-top: 20px;
+  padding-top: 30px;
+  
+` 

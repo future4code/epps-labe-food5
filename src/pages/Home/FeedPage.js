@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import {baseUrl, token} from './Consts/Consts'
@@ -31,18 +32,31 @@ export default function FeedPage() {
             })
     }
 
+// import React, { useContext, useEffect } from 'react'
+// import RestaurantCard from './RestaurantCard'
+// import GlobalStateContext from '../../contexts/GlobalStateContext'
+
+// const FeedPage = () => {
+//     const { states, requests } = useContext(GlobalStateContext)
+
+//     useEffect(() => {
+//         requests.listRestaurants()
+//     }, [])  
+    
+
     return (
         <div>
-            {loading && <LinearProgress />}
-            {restaurants.map(restaurants => {
-                return (
-                    <RestaurantCard
+        {states.restaurants.map((restaurants) => {
+            return (
+                <RestaurantCard
                     key={restaurants.id}
                     restaurantId={restaurants.id}
                     restaurants={restaurants}
-                    />
-                )
-            })}
+                />
+            )
+        })}
         </div>
-    );
+    )
 }
+
+export default FeedPage

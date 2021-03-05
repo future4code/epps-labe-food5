@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const CardRestaurant = styled.div`
     width: 20.5rem;
     height: 11.75rem;
+    margin: 0 auto;
     border: 1px solid black;
     border-radius: 15px;
     margin-bottom: 10px;
@@ -23,6 +24,10 @@ export const CardRestaurantDetail = styled.div`
     display: flex;
     width: 20.5rem;
     height: 7rem;
+    position: relative;
+    width: 20.5rem;
+    height: 7rem;
+    margin: 0 auto;
     border: 1px solid black;
     border-radius: 15px;
     margin-bottom: 10px;
@@ -45,6 +50,12 @@ export const ButtonAdd = styled.button`
     border-radius: 8px;
     margin-left: 142px;
     margin-bottom: 200px;
+    position: absolute;
+    width: 5.625rem;
+    height: 1.938rem;
+    border-radius: 8px;
+    margin-left: 238px;
+    margin-top: 80px;
 `
 
 export const RestaurantDetailName = styled.p`
