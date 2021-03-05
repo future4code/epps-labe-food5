@@ -1,16 +1,13 @@
-import React from 'react'
-import { useHistory } from 'react-router-dom'
+import React, {useContext} from 'react'
 import {CardRestaurant, CardRestaurantImage, CardRestaurantData} from './HomeStyled'
+import GlobalStateContext from '../../contexts/GlobalStateContext'
 
 const RestaurantCard = (props) => {
-    const history = useHistory()
 
-    const goToRestaurant = () => {
-        history.push(`/restaurant/${props.restaurants.id}`)
-    }
+    const { requests } = useContext(GlobalStateContext)
 
     return (
-        <CardRestaurant onClick={goToRestaurant}>
+        <CardRestaurant onClick={() => requests.restaurantDetails(props.restaurants.id) || requests.listRestaurants(props.restaurants.id)}>
             <CardRestaurantImage
             src={props.restaurants.logoUrl}
             alt={props.restaurants.name}
