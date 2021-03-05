@@ -1,15 +1,16 @@
+
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import {baseUrl, token} from './Consts/Consts'
 import RestaurantCard from './RestaurantCard'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import axios from 'axios'
 
 export default function FeedPage() {
+    const history = useHistory()
 
     const [restaurants, setRestaurants] = useState([])
     const [loading, setLoading] = useState(false)
-
-    const baseUrl = "https://us-central1-missao-newton.cloudfunctions.net/fourFoodB"
-
 
     useEffect(() => {
         listRestaurants()
@@ -17,8 +18,6 @@ export default function FeedPage() {
 
     const listRestaurants = () => {
         setLoading(true)
-
-        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImliZHVaSW9Ta280U1pmaXRUTU5zIiwibmFtZSI6IkZyZWUgV2lsbGlhbSIsImVtYWlsIjoiZnJlZS53aWxsaWFtQGZ1dHVyZTQuY29tIiwiY3BmIjoiMTIzLjQ1Ni43ODktMDAiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiQXYuIEhvcsOhY2lvIExhZmVyLCA1MDAsIFZpdHJhIFRvd2VyIC0gSXRhaW0gQmliaSIsImlhdCI6MTYxNDcwODE5Nn0.ymg1ECNZhbOm_nYCETO3jOOfbkJ_sWV4sJ3b0x9VRoU"
 
         axios.get(`${baseUrl}/restaurants`, {
             headers: {
@@ -33,17 +32,29 @@ export default function FeedPage() {
             })
     }
 
-    return (
-        <div>
-            {loading && <LinearProgress />}
-            {restaurants.map(restaurants => {
-                return (
-                    <RestaurantCard
-                    key={restaurants.id}
-                    restaurants={restaurants}
-                    />
-                )
-            })}
-        </div>
-    );
+// import React, { useContext, useEffect } from 'react'
+// import RestaurantCard from './RestaurantCard'
+// import GlobalStateContext from '../../contexts/GlobalStateContext'
+
+// const FeedPage = () => {
+//     const { states, requests } = useContext(GlobalStateContext)
+
+//     useEffect(() => {
+//         requests.listRestaurants()
+//     }, [])  
+    
+
+//     return (
+//         <div>
+//         {states.restaurants.map((restaurants) => {
+//             return (
+//                 <RestaurantCard
+//                     key={restaurants.id}
+//                     restaurantId={restaurants.id}
+//                     restaurants={restaurants}
+//                 />
+//             )
+//         })}
+//         </div>
+//     )
 }
