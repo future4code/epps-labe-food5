@@ -7,7 +7,6 @@ function App() {
     <GlobalState>
       <Router />
     </GlobalState>
-
   );
 }
 

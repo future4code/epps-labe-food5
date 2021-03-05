@@ -1,133 +1,182 @@
-import React from 'react';
-import Grid from '@material-ui/core/Grid';
+import React, { useLayoutEffect, useState } from 'react'
+import axios from 'axios'
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import { Largura, Pagina, Titulo } from './styleAddress'
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', 
-    marginTop: theme.spacing(3),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+import { Button, ThemeProvider } from '@material-ui/core';
+import { Campo, Div, FormAddre, H3, theme,ScreenContainer } from './AddressStyle';
+import { goToFeed } from '../../routes/Coordinator';
+import { useHistory } from 'react-router-dom'
+//import useProtectedPage from '../hooks/useProtectedPage';
 
 
-export default function PofileAddress() {
-  const classes = useStyles();
-  return (
-    <Pagina>
-      <Titulo>      
-        <h1>Endereço</h1>     
-      </Titulo>      
-    <Largura>
-    <div className={classes.paper}>
-    <React.Fragment>
-    <Grid container spacing={2}>
-        <Grid item xs={12}>
-            <TextField
-              required
-              id="address1"
-              name="address1"
-              label="Logradouro (Rua, Av.)"
-              fullWidth
-              autoComplete="shipping address-line1"
-            />
-        </Grid>
-      
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="Number"
-            name="number"
-            label="Número"
-            fullWidth
-            autoComplete="number"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="complemento"
-            name="complemento"
-            label="Complemento"
-            fullWidth
-            autoComplete="complemento"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            required
-            id="bairro"
-            name="bairro"
-            label="Bairro"
-            fullWidth
-            autoComplete="neighborhood"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="city"
-            name="city"
-            label="Cidade"
-            fullWidth
-            autoComplete="cidade"
-          />
-        </Grid>
-        {/* <Grid item xs={12} sm={6}>
-          <TextField id="state" name="state" label="State/Province/Region" fullWidth />
-        </Grid> */}
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="state"
-            name="state"
-            label="Estado - UF"
-            fullWidth
-            autoComplete="state"
-          />
-        </Grid>
-        {/* <Grid item xs={12} sm={6}>
-          <TextField
-            id="country"
-            name="country"
-            label="País"
-            fullWidth
-            autoComplete="shipping country"
-          />
-        </Grid> */}
-        <Grid item xs={6}>
-        <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Salvar
-          </Button>
-        </Grid>
-      </Grid>
-    </React.Fragment>
-    </div>
-    </Largura>
-    </Pagina>
-  );
+const ProfileAddress = () => {
+    //useProtectedPage()
+    const history = useHistory();
+    //validação do usuário por meio do token//  
+    useLayoutEffect(() => {
+        if(localStorage.getItem("token") == null){
+          goToFeed(history)
+        }
+      }, [])
+
+    //Cadastro do endereço//
+    const [form, setForm ] = useState({
+      street: "", 
+      number: "", 
+      neighbourhood: "", 
+      city: "", 
+      state: "", 
+      complement: ""
+    })
+                                        
+    const newAddress = (event) =>{
+
+        const { name, value } = event.target
+        setForm({...form, [name]: value})
+    }
+    
+    const CadAdrres = () => {
+        console.log(form);
+        const elemento = document.getElementById("form-enderec")
+        const valido = elemento.checkValidity()
+        elemento.reportValidity()
+        if(valido){
+                axios.put(`https://us-central1-missao-newton.cloudfunctions.net/fourFoodB/address`,form,{
+                    headers:{
+                               auth: localStorage.getItem('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImliZHVaSW9Ta280U1pmaXRUTU5zIiwibmFtZSI6IkZyZWUgV2lsbGlhbSIsImVtYWlsIjoiZnJlZS53aWxsaWFtQGZ1dHVyZTQuY29tIiwiY3BmIjoiMTIzLjQ1Ni43ODktMDAiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiQXYuIEhvcsOhY2lvIExhZmVyLCA1MDAsIFZpdHJhIFRvd2VyIC0gSXRhaW0gQmliaSIsImlhdCI6MTYxNDc3MzIyOX0.L_efDQhyT2F6gXMNkTk005ijxG8l9YakIQYgp-idZYU')
+                           }
+               }).then((Response)=> {
+                localStorage.setItem("token", Response.data.token)   
+                alert("ok")})
+                .catch((error) => {
+                    console.log(error)
+                    alert("Erro tente cadastrar novamente")
+                })
+                }
+    }
+    
+     return (
+        <Div>
+              <ScreenContainer>            
+                <form id="form-enderec" style={{width: '90%'}}>
+                    <H3>Meu Endereço</H3>
+                        <FormAddre>
+                        
+                            <Campo>
+                                         
+                                <TextField
+                                    required
+                                    id="id-street"
+                                    label="Logradouro"
+                                    placeholder="Rua/AV"
+                                    name="street"
+                                    value={form.street}
+                                    onChange={newAddress}
+                                    type="text"
+                                    variant="outlined"
+                                    fullWidth                                    
+                                    InputLabelProps={{
+                                        shrink: true,
+                                        }}
+                                />                                
+                            </Campo>
+                            <Campo>
+                                <TextField
+                                    required
+                                    id="number-log"
+                                    label="Numero"
+                                    placeholder="Numero"
+                                    name="number"
+                                    value={form.number}
+                                    onChange={newAddress}
+                                    type="number"
+                                    variant="outlined"
+                                    fullWidth
+                                    InputLabelProps={{
+                                        shrink: true,
+                                        }}
+                                />
+                            </Campo> 
+
+                            <Campo>
+                                <TextField
+                                    id="complement-log"
+                                    label="Complemento"
+                                    placeholder="Apto./Bloco"
+                                    name="complement"
+                                    value={form.complement}
+                                    onChange={newAddress}
+                                    variant="outlined"
+                                    fullWidth
+                                    InputLabelProps={{
+                                    shrink: true,
+                                    }}                                    
+                                />
+                            </Campo>
+                                                       
+                            <Campo>
+                                <TextField
+                                    required
+                                    id="neighbourhood-log"
+                                    label="Bairro"
+                                    placeholder="Bairro"
+                                    name="neighbourhood"
+                                    value={form.neighbourhood}
+                                    onChange={newAddress}
+                                    variant="outlined"
+                                    fullWidth
+                                    InputLabelProps={{
+                                        shrink: true,
+                                        }}
+                                />
+                            </Campo>                            
+                            <Campo>
+                                <TextField
+                                    required
+                                    id="city-log"
+                                    label="Cidade"
+                                    placeholder="Cidade"
+                                    name="city"
+                                    value={form.city}
+                                    onChange={newAddress}
+                                    variant="outlined"
+                                    fullWidth                              
+                                    InputLabelProps={{
+                                        shrink: true,
+                                        }}
+                                />
+                            </Campo>
+                            <Campo>
+                                <TextField
+                                    required
+                                    id="state-log"
+                                    label="Estado"
+                                    placeholder="Estado"
+                                    name="state"
+                                    value={form.state}
+                                    onChange={newAddress}
+                                    variant="outlined"
+                                    fullWidth
+                                    InputLabelProps={{
+                                    shrink: true,
+                                    }}                                    
+                                />
+                            </Campo>                            
+                            <Campo>
+                                <ThemeProvider theme={theme}>
+                                    <Button 
+                                        onClick={CadAdrres}
+                                        fullWidth
+                                        variant="contained" 
+                                        color="primary" 
+                                       
+                                    >Salvar</Button>
+                                </ThemeProvider>
+                            </Campo>
+                        
+                        </FormAddre>    
+                </form>
+              </ScreenContainer>
+      </Div>
+    )
 }
-
+export default ProfileAddress;

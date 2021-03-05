@@ -1,18 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect, AsyncStorage  } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
-
+import axios from 'axios'
+import { useHistory } from 'react-router-dom'
+import { goToUsuario} from '../../routes/Coordinator';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -34,16 +32,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PofileUser() {
+export default function ProfileUser() {
   const classes = useStyles();
   const history = useHistory()
-
+    
+  const [name, setName] = useState("")
   const [email, setEmail] = useState("");
   const [cpf, setCpf] = useState("");
-  const [username, setUserName] = useState("")
-
-  const onChangeUserName = (event) => {
-  setUserName(event.target.value)
+  
+  const onChangeName = (event) => {   
+  setName(event.target.value)
   } 
     
   const onChangeEmail = (event) => {
@@ -54,30 +52,31 @@ export default function PofileUser() {
         setCpf(event.target.value)
     }
     
-    const createUser = (event) => {
-        event.preventDefault();
-        const body = {
-            email: email,
-            cpf: cpf,
-            username: username,
-        };
-    }
+    const token = useEffect(() => {
+      if(localStorage.getItem("token") == null) {
+         goToUsuario(history)
+      }  
+      }, []) 
+  
     
     const onSubmitForm = (event) => {
       event.preventDefault();
       const body = {
-        username: username,    
+        name: name,    
         email: email,
         cpf: cpf
       };
-    axios.post("URL", body,            
+      console.log(body);
+
+    axios.put("https://us-central1-missao-newton.cloudfunctions.net/fourFoodB/profile",
+    body,{headers:{auth:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImliZHVaSW9Ta280U1pmaXRUTU5zIiwibmFtZSI6IkZyZWUgV2lsbGlhbSIsImVtYWlsIjoiZnJlZS53aWxsaWFtQGZ1dHVyZTQuY29tIiwiY3BmIjoiMTIzLjQ1Ni43ODktMDAiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiQXYuIEhvcsOhY2lvIExhZmVyLCA1MDAsIFZpdHJhIFRvd2VyIC0gSXRhaW0gQmliaSIsImlhdCI6MTYxNDc3MzIyOX0.L_efDQhyT2F6gXMNkTk005ijxG8l9YakIQYgp-idZYU"}}            
     ).then((response) => {
       window.localStorage.setItem("token", response.data.token);
-      history.push('/timeline')
-      setUserName("")
+      history.push('/endereco')
+      setName("")
       setEmail("")
       setCpf("")
-      alert("Usuário ok");
+      alert("Usuário logado com êxito");
 
     }).catch((error) => alert(error.response.data.message))
     };
@@ -85,14 +84,13 @@ export default function PofileUser() {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
+
       <div className={classes.paper}>
-        {/* <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar> */}
+       
         <Typography component="h1" variant="h5">
           Editar
         </Typography>
-        <form className={classes.form} noValidate>
+        <form onSubmit={onSubmitForm} className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} >
               <TextField
@@ -101,9 +99,11 @@ export default function PofileUser() {
                 variant="outlined"
                 required
                 fullWidth
-                id="username"
+                id="name"
                 label="Nome"
+                value={name}
                 autoFocus
+                onChange={onChangeName}
               />
             </Grid>
             <Grid item xs={12}>
@@ -113,8 +113,10 @@ export default function PofileUser() {
                 fullWidth
                 id="email"
                 label="Email"
+                value={email} 
                 name="email"
                 autoComplete="email"
+                onChange={onChangeEmail}
               />
             </Grid>
             <Grid item xs={12}>
@@ -124,9 +126,11 @@ export default function PofileUser() {
                 fullWidth
                 name="Cpf"
                 label="Cpf"
+                id="Cpf"
                 type="text"
-                id="cpf"
+                value={cpf}
                 autoComplete="Cpf"
+                onChange={onChangeCpf}
               />
             </Grid>
             <Grid item xs={12}>
