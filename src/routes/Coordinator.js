@@ -13,3 +13,15 @@ export const goToEndereco = (history) => {
 export const goToUsuario = (history) => {
     history.push('/usuario')
 }
+
+export const goToRestaurant = (history, restaurantId) => {
+     history.push(`/restaurant/${restaurantId}`)
+}
+
+export const goToSignUp = (history) => {
+        history.push("/sign-up")
+}
+
+export const goToPerfil = (history)=>{
+    history.push('/perfil')
+}

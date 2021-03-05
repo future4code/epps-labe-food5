@@ -52,11 +52,11 @@ export default function ProfileUser() {
         setCpf(event.target.value)
     }
     
-    const token = useEffect(() => {
-      if(localStorage.getItem("token") == null) {
-         goToUsuario(history)
-      }  
-      }, []) 
+    // const token = useEffect(() => {
+    //   if(localStorage.getItem("token") == null) {
+    //      goToUsuario(history)
+    //   }  
+    //   }, []) 
   
     
     const onSubmitForm = (event) => {

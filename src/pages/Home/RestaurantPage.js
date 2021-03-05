@@ -1,64 +1,58 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
-import { goToLogin, goToFeed } from '../../routes/Coordinator'
+import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import { baseUrl, token } from './Consts/Consts'
+import {CardRestaurantDetail,
+   CardRestaurantDetailImage,
+    CardRestaurantDetailData, 
+    RestaurantDetailName,
+    RestaurantDetailDescription, 
+    RestaurantDetailPrice,
+     ButtonAdd} from './HomeStyled'
 
 const RestaurantPage = () => {
 
-    const [restaurantsDetail, setRestaurantsDetail] = useState([])
+  const params = useParams()
 
-    const history = useHistory()
-    const params = useParams()
+  const [restaurantsDetail, setRestaurantsDetail] = useState([])
 
-    const baseUrl = "https://us-central1-missao-newton.cloudfunctions.net/fourFoodB"
+  useEffect(() => {
+    restaurantDetails()
+  }, [])
 
-    // useEffect(() => {
+  const restaurantDetails = () => {
+    console.log(params)
 
-    //     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImliZHVaSW9Ta280U1pmaXRUTU5zIiwibmFtZSI6IkZyZWUgV2lsbGlhbSIsImVtYWlsIjoiZnJlZS53aWxsaWFtQGZ1dHVyZTQuY29tIiwiY3BmIjoiMTIzLjQ1Ni43ODktMDAiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiQXYuIEhvcsOhY2lvIExhZmVyLCA1MDAsIFZpdHJhIFRvd2VyIC0gSXRhaW0gQmliaSIsImlhdCI6MTYxNDcwODE5Nn0.ymg1ECNZhbOm_nYCETO3jOOfbkJ_sWV4sJ3b0x9VRoU"
-
-    //     if ((token) === null) {
-    //       goToLogin(history)
-    //     } else if (!params.restaurantID) {
-    //       goToFeed(history)
-    //     }
-    //   }, [])
-    
-      useEffect(() => {
-        restaurantDetails()
-      }, [])
-    
-      const restaurantDetails = () => {
-
-        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImliZHVaSW9Ta280U1pmaXRUTU5zIiwibmFtZSI6IkZyZWUgV2lsbGlhbSIsImVtYWlsIjoiZnJlZS53aWxsaWFtQGZ1dHVyZTQuY29tIiwiY3BmIjoiMTIzLjQ1Ni43ODktMDAiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiQXYuIEhvcsOhY2lvIExhZmVyLCA1MDAsIFZpdHJhIFRvd2VyIC0gSXRhaW0gQmliaSIsImlhdCI6MTYxNDcwODE5Nn0.ymg1ECNZhbOm_nYCETO3jOOfbkJ_sWV4sJ3b0x9VRoU"
-
-        axios.get(`${baseUrl}/restaurants/1`, {
-          headers: {
-            auth: token
-          }
-        })
-          .then((response) => {
-            setRestaurantsDetail(response.data.restaurant.products)
-            console.log(response.data.restaurant.products)
-          }).catch ((err) => {
-              console.log(err.data)
-          })
+    axios.get(`${baseUrl}/restaurants/${params.restaurantId}`, {
+      headers: {
+        auth: token
       }
+    })
+      .then((response) => {
+        setRestaurantsDetail(response.data.restaurant.products)
+        console.log(response.data.restaurant.products)
+      }).catch((err) => {
+        console.log(err.data)
+      })
+  }
 
-    return (
-        <div>
-            {restaurantsDetail.map(product => {
-          return(
-            <div>
-            <img src={product.photoUrl}/>
-            <p>{product.name}</p>
-            <p>{product.category}</p>
-            <p>{product.description}</p>
-            <p>{product.price}</p>
-            </div>
-          )
-        })} 
-        </div>
-    )
+  return (
+    <div>
+      {restaurantsDetail.map(product => {
+        return (
+          <CardRestaurantDetail key={product.id}>
+            <CardRestaurantDetailImage img src={product.photoUrl} />
+            <CardRestaurantDetailData>
+              <RestaurantDetailName>{product.name}</RestaurantDetailName>
+              <RestaurantDetailDescription>{product.description}</RestaurantDetailDescription>
+              <RestaurantDetailPrice>{product.price}</RestaurantDetailPrice>
+              <ButtonAdd>adicionar</ButtonAdd>
+            </CardRestaurantDetailData>
+          </CardRestaurantDetail>
+        )
+      })}
+    </div>
+  )
 }
 
 export default RestaurantPage
