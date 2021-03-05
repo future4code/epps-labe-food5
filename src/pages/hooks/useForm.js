@@ -13,7 +13,6 @@ const useForm = (initialState) => {
     };
 
     
-    
     return [form, onChange, clearFields];
   };
   export default useForm;

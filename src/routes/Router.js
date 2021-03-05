@@ -8,6 +8,8 @@ import ErrorPage from '../pages/Error/ErrorPage'
 
 import ProfileAddress from '../pages/Profile/ProfileAddress'
 import ProfileUser from '../pages/Profile/ProfileUser'
+import ProfilePage from '../pages/Profile/ProfilePage'
+
 
 import GlobalState from '../global/GlobalState'
 
@@ -22,6 +24,9 @@ const Router = () => {
                 </Route>
                 <Route exact path={'/signUp'}>
                     <SignUpPage />
+                </Route>
+                <Route exact path={'/perfil'}>
+                    <ProfilePage />
                 </Route>
                 <Route exact path={'/usuario'}>
                     <ProfileUser />

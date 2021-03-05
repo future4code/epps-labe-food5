@@ -14,6 +14,7 @@ export const goToUsuario = (history) => {
     history.push('/usuario')
 }
 
+
 export const goToFeedPage = (history) => {
     history.push('/feed')
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import {signup} from '../../services/apiRequest'
-import useForm from '../hooks/useForm';
+import useForm from '../hooks/useForm'
 import { useHistory } from 'react-router-dom';
 
 import {

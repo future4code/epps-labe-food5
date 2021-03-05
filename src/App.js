@@ -4,6 +4,9 @@ import GlobalState from './global/GlobalState'
 
 function App() {
   return (
+    <div>
+      <Router />
+    </div>
     <GlobalState>
       <Router />
     </GlobalState>
