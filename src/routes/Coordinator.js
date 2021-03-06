@@ -2,19 +2,6 @@ export const goToLogin = (history) => {
     history.push('/login')
 }
 
-export const goToFeed = (history) => {
-    history.push('/')
-}
-
-export const goToEndereco = (history) => {
-    history.push('/endereco')
-}
-
-export const goToUsuario = (history) => {
-    history.push('/usuario')
-}
-
-
 export const goToFeedPage = (history) => {
     history.push('/feed')
 }
@@ -24,17 +11,19 @@ export const goToRestaurant = (history, restaurantId) => {
     }
 
 export const goToSignUp = (history) => {
-        history.push("/sign-up")
-    }
+        history.push("/signUp")
+}
 
-export const goToPerfil = (history)=>{
-        history.push('/perfil')
+export const goToUserPage = (history)=>{
+        history.push('/user')
     }
 
 export const goToAdressPage = (history) => {
-        history.push ('/endereco')
+        history.push ('/address')
     }
 
 export const goToProfilePage = (history) =>{
-        history.push('/perfil')
+        history.push('/profile')
     }
+
+

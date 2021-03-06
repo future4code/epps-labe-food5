@@ -61,7 +61,7 @@ display: flex;
 flex-direction: center;
 background-image: url(${Pencil});
 background-repeat: no-repeat;
-background-size:50%;
+background-size:70%;
 align-items: center;
 `;
 
@@ -92,4 +92,10 @@ export const HistoricRequests = styled.section`
 export const Li = styled.li` 
 list-style: none;
 margin-left: 2rem;
+`;
+
+export const Boton = styled.button` 
+width: 50%;
+display:none;
+border: none;
 `;

@@ -3,7 +3,7 @@ import axios from 'axios'
 import TextField from '@material-ui/core/TextField';
 import { Button, ThemeProvider } from '@material-ui/core';
 import { Campo, Div, FormAddre, H3, theme,ScreenContainer } from './AddressStyle';
-import { goToFeed } from '../../routes/Coordinator';
+import { goToFeedPage } from '../../routes/Coordinator';
 import { useHistory } from 'react-router-dom'
 //import useProtectedPage from '../hooks/useProtectedPage';
 
@@ -14,7 +14,7 @@ const ProfileAddress = () => {
     //validação do usuário por meio do token//  
     useLayoutEffect(() => {
         if(localStorage.getItem("token") == null){
-          goToFeed(history)
+          goToFeedPage(history)
         }
       }, [])
 
@@ -29,37 +29,39 @@ const ProfileAddress = () => {
     })
                                         
     const newAddress = (event) =>{
-
+        event.preventDefault();
         const { name, value } = event.target
         setForm({...form, [name]: value})
     }
     
     const CadAdrres = () => {
         console.log(form);
-        const elemento = document.getElementById("form-enderec")
-        const valido = elemento.checkValidity()
-        elemento.reportValidity()
-        if(valido){
+        // const elemento = document.getElementById("form-enderec")
+        // const valido = elemento.checkValidity()
+        // elemento.reportValidity()
+        // if(valido){
                 axios.put(`https://us-central1-missao-newton.cloudfunctions.net/fourFoodB/address`,form,{
                     headers:{
-                               auth: localStorage.getItem('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImliZHVaSW9Ta280U1pmaXRUTU5zIiwibmFtZSI6IkZyZWUgV2lsbGlhbSIsImVtYWlsIjoiZnJlZS53aWxsaWFtQGZ1dHVyZTQuY29tIiwiY3BmIjoiMTIzLjQ1Ni43ODktMDAiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiQXYuIEhvcsOhY2lvIExhZmVyLCA1MDAsIFZpdHJhIFRvd2VyIC0gSXRhaW0gQmliaSIsImlhdCI6MTYxNDc3MzIyOX0.L_efDQhyT2F6gXMNkTk005ijxG8l9YakIQYgp-idZYU')
+                               auth: localStorage.getItem('token')
                            }
                }).then((Response)=> {
-                localStorage.setItem("token", Response.data.token)   
-                alert("ok")})
+                   console.log("aqui é bla",Response.data)
+                localStorage.setItem("token", Response.data.token) 
+                history.push('/profile')  
+                alert("Endereço atualizado com sucesso")})
                 .catch((error) => {
                     console.log(error)
-                    alert("Erro tente cadastrar novamente")
+                    alert("Erro na atualização! Favor tente novamente")
                 })
                 }
-    }
+    //}
     
      return (
         <Div>
               <ScreenContainer>            
-                <form id="form-enderec" style={{width: '90%'}}>
+                <form  id="form-enderec" style={{width: '90%'}}>
                     <H3>Meu Endereço</H3>
-                        <FormAddre>
+                        <FormAddre> 
                         
                             <Campo>
                                          

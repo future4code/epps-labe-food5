@@ -40,6 +40,10 @@ const GlobalState = (props) => {
             })
     }
 
+//     const states = { restaurants, restaurantsDetail, form } 
+//     const setters = { setRestaurants, setRestaurantsDetail, setForm }
+//     const requests = { listRestaurants, restaurantDetails, CadAddress, newAddress }
+
     const states = { restaurants, restaurantsDetail }
     const setters = { setRestaurants, setRestaurantsDetail }
     const requests = { listRestaurants, restaurantDetails }

@@ -22,11 +22,10 @@ export const CardRestaurantData = styled.div`
 
 export const CardRestaurantDetail = styled.div`
     display: flex;
-    width: 20.5rem;
-    height: 7rem;
     position: relative;
     width: 20.5rem;
     height: 7rem;
+
     margin: 0 auto;
     border: 1px solid black;
     border-radius: 15px;
@@ -45,16 +44,14 @@ export const CardRestaurantDetailData = styled.div`
 `
 
 export const ButtonAdd = styled.button`
-    width: 5.625rem;
-    height: 1.938rem;
-    border-radius: 8px;
-    margin-left: 142px;
-    margin-bottom: 200px;
     position: absolute;
     width: 5.625rem;
     height: 1.938rem;
     border-radius: 8px;
-    margin-left: 238px;
+    margin-left: 142px;
+    margin-bottom: 200px;  
+
+   // margin-left: 238px;
     margin-top: 80px;
 `
 

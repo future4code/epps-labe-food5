@@ -2,29 +2,28 @@ import React from 'react';
 import {InputsContainer, LogoImg, PageText, PageTextContainer } from "./styled";
 import { InputWithLabelContainer, InputLabel, InputText, PasswordFormContainer, PasswordIconImg, InputPass } from "../../components/inputs/styled"
 import { useHistory } from 'react-router-dom';
-import useForm from '../hooks/useForm';
+import useLogin from '../hooks/useLogin'
 import Logo4Food from '../img/logo.png';
 import Visible from '../img/icons/senha-2.png';
-import Invisible from '../img/icons/senha.png';
 import { MainButton } from '../../components/button/mainButtonStyle';
-import { login } from '../../services/apiRequest'
+
 
 
 const LoginForm = () => {
-  const [form, handleInputChange] = useForm({ email: '', password: ''})
+  const [form, handleInputChange, Login] = useLogin()
   const history = useHistory()
 
-  const onClickLogin = (event) => {
-    event.preventDefault()
-      login(form, history)
-    }
+  // const onClickLogin = (event) => {
+  //   event.preventDefault()
+  //     login(form, history)
+  //   }
 
   // const onClickPassword = (event) =>{
     
   // }
   
   return (
-    <form   onSubmit={onClickLogin}>  
+    <form   onSubmit={Login}>  
       <LogoImg src={Logo4Food} alt="4FOOD" />
       <PageTextContainer>
       <PageText>Entrar</PageText>
@@ -54,8 +53,7 @@ const LoginForm = () => {
             require
             />
             <PasswordIconImg src={Visible}/>
-        </PasswordFormContainer>
-      
+        </PasswordFormContainer>     
 
       <MainButton>
           Entrar

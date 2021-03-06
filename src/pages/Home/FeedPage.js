@@ -1,36 +1,36 @@
 
+//import React, { useContext, useEffect } from 'react'
+
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import {baseUrl, token} from './Consts/Consts'
+
 import RestaurantCard from './RestaurantCard'
-import LinearProgress from '@material-ui/core/LinearProgress'
-import axios from 'axios'
+import GlobalStateContext from '../../contexts/GlobalStateContext'
 
-export default function FeedPage() {
-    const history = useHistory()
-
-    const [restaurants, setRestaurants] = useState([])
-    const [loading, setLoading] = useState(false)
+const FeedPage = () => {
+    const { states, requests } = useContext(GlobalStateContext)
 
     useEffect(() => {
-        listRestaurants()
-    }, [])
+        requests.listRestaurants()
+    }, [])  
+    
 
-    const listRestaurants = () => {
-        setLoading(true)
+    return (
+        <div>
+        {states.restaurants.map((restaurants) => {
+            return (
+                <RestaurantCard
+                    key={restaurants.id}
+                    restaurants={restaurants}
+                />
+            )
+        })}
+        </div>
+    )
+}
 
-        axios.get(`${baseUrl}/restaurants`, {
-            headers: {
-                auth: token
-            }
-        })
-            .then((response) => {
-                setRestaurants(response.data.restaurants)
-                setLoading(false)
-            }).catch((err) => {
-                console.log(err.response)
-            })
-    }
+export default FeedPage
 
 // import React, { useContext, useEffect } from 'react'
 // import RestaurantCard from './RestaurantCard'
@@ -58,3 +58,4 @@ export default function FeedPage() {
 //         </div>
 //     )
 }
+
