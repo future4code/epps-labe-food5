@@ -1,7 +1,9 @@
 import React from "react";
-import {signup} from '../../services/apiRequest'
-import useForm from '../hooks/useForm';
+import useForm from '../../hooks/useForm'
 import { useHistory } from 'react-router-dom';
+import axios from 'axios'
+import {baseUrl} from '../../Constants/url'
+import { goToAdressPage } from '../../routes/Coordinator'
 
 import {
   MainContainer,
@@ -23,16 +25,33 @@ import { InputAdornment, TextField } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 
 const SignUpPage = () => {
-  const [form, handleInputChange] = useForm({name:'', email: '', cpf:'', password: ''})
+  const [form, handleInputChange] = useForm({ name: '', email: '', cpf: '', password: '' })
   const history = useHistory()
 
- const onClickSignUp= (event) => {
+  const signUp = (event) => {
     event.preventDefault()
-    signup (form, history)
+
+    const body = {
+      name: form.name,
+      email: form.email,
+      cpf: form.cpf,
+      password: form.password
     }
 
+    axios.post(`${baseUrl}/signup`, body, {
+    })
+      .then((response) => {
+        console.log(response.data.user)
+        goToAdressPage(history)
+        alert("Deu certo")
+      }).catch((err) => {
+        console.log(err.response)
+        alert("Email ou CPF já cadastrado")
+      })
+  }
+
   return (
-    <form  onSubmit={onClickSignUp}>
+    <form onSubmit={signUp}>
       <MainContainer>
         <Header>
           <IconBox src={backArrow} alt="icone de voltar para página anterior" />

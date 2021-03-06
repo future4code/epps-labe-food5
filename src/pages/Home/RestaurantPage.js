@@ -9,6 +9,7 @@ import {
   RestaurantDetailPrice,
   ButtonAdd
 } from './HomeStyled'
+import useProtectedPage from '../../hooks/useProtectedPage'
 import GlobalStateContext from '../../contexts/GlobalStateContext'
 
 const RestaurantPage = () => {
@@ -19,6 +20,8 @@ const RestaurantPage = () => {
   const [restaurantsDetail, setRestaurantsDetail] = useState([])
 =======
 >>>>>>> e45fccdfbd661866f73636570f977d41aea3bd10
+
+  useProtectedPage()
 
   useEffect(() => {
     requests.restaurantDetails()

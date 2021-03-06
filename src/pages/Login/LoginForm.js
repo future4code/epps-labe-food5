@@ -1,29 +1,16 @@
 import React from 'react';
 import {InputsContainer, LogoImg, PageText, PageTextContainer } from "./styled";
 import { InputWithLabelContainer, InputLabel, InputText, PasswordFormContainer, PasswordIconImg, InputPass } from "../../components/inputs/styled"
-import { useHistory } from 'react-router-dom';
-import useLogin from '../hooks/useLogin'
+import useLogin from '../../hooks/useLogin'
 import Logo4Food from '../img/logo.png';
 import Visible from '../img/icons/senha-2.png';
 import { MainButton } from '../../components/button/mainButtonStyle';
 
-
-
 const LoginForm = () => {
-  const [form, handleInputChange, Login] = useLogin()
-  const history = useHistory()
+  const [form, onChange, Login] = useLogin()
 
-  // const onClickLogin = (event) => {
-  //   event.preventDefault()
-  //     login(form, history)
-  //   }
-
-  // const onClickPassword = (event) =>{
-    
-  // }
-  
   return (
-    <form   onSubmit={Login}>  
+    <form onSubmit={Login}>  
       <LogoImg src={Logo4Food} alt="4FOOD" />
       <PageTextContainer>
       <PageText>Entrar</PageText>
@@ -35,7 +22,7 @@ const LoginForm = () => {
             name='email'
             value={form.email}
             placeholder= 'email@email.com'
-            onChange={handleInputChange}
+            onChange={onChange}
             label='E-mail'
             type={'email'}
             required
@@ -48,7 +35,7 @@ const LoginForm = () => {
             name='password'
             value={form.password}
             placeholder= 'Mínimo 6 caracteres'
-            onChange={handleInputChange}
+            onChange={onChange}
             type={"password"}
             require
             />

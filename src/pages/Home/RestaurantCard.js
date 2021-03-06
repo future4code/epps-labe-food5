@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 
@@ -6,11 +7,15 @@
 
 =======
 >>>>>>> e45fccdfbd661866f73636570f977d41aea3bd10
+=======
+>>>>>>> 4bb70e1d0f38c6c5e22e6ab5aa099caeec092c30
 import React, {useContext} from 'react'
 import {CardRestaurant, CardRestaurantImage, CardRestaurantData} from './HomeStyled'
+import useProtectedPage from '../../hooks/useProtectedPage'
 import GlobalStateContext from '../../contexts/GlobalStateContext'
 
 const RestaurantCard = (props) => {
+    useProtectedPage()
 
     const { requests } = useContext(GlobalStateContext)
 

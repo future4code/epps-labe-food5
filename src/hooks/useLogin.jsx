@@ -1,9 +1,10 @@
 import axios from 'axios'
 import { useHistory } from 'react-router'
 import useForm from './useForm'
+import {baseUrl} from '../Constants/url'
 
 export default function Login() {
-    const [form, handleInputChange] = useForm({})
+    const [form, onChange] = useForm({})
     const history = useHistory()
 
     const Login = (event) => {
@@ -13,17 +14,17 @@ export default function Login() {
             password: form.password
         }
 
-        axios.post("https://us-central1-missao-newton.cloudfunctions.net/fourFoodB/login", body)
-            .then((Response) => {
-                console.log("aqui é bla", Response.data)
-                localStorage.setItem("token", Response.data.token)
-                history.push('/feed')
+        axios.post(`${baseUrl}/login`, body)
+            .then((response) => {
+                console.log(response.data)
+                localStorage.setItem("token", response.data.token)
                 alert("Logado com exito")
+                history.push('/feed')
             })
             .catch((error) => {
                 console.log(error)
                 alert("Erro no login! Favor tente novamente")
             })
     }
-return[handleInputChange, form, Login]
+return [onChange, form, Login]
 }

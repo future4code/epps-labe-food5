@@ -12,7 +12,8 @@ import GlobalState from '../global/GlobalState'
 
 const Router = () => {
     return (
-        <GlobalState>
+        <BrowserRouter>
+            <GlobalState>
                 <Switch>
                     <Route exact path={'/login'}>
                         <LoginPage />
@@ -31,7 +32,8 @@ const Router = () => {
                     </Route>
                 </Switch>
             </GlobalState>
-  );
+        </BrowserRouter>
+    );
 };
 
 export default Router;
