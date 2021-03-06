@@ -14,21 +14,13 @@ import GlobalStateContext from '../../contexts/GlobalStateContext'
 
 const RestaurantPage = () => {
   const { states, requests } = useContext(GlobalStateContext)
-<<<<<<< HEAD
-  const params = useParams()
-
-  const [restaurantsDetail, setRestaurantsDetail] = useState([])
-=======
->>>>>>> e45fccdfbd661866f73636570f977d41aea3bd10
-
+  
   useProtectedPage()
 
   useEffect(() => {
     requests.restaurantDetails()
   }, [requests])
 
-
-<<<<<<< HEAD
   useEffect(() => {
     requests.listRestaurants()
   }, [requests])
@@ -49,40 +41,6 @@ const RestaurantPage = () => {
     )
   })
 
-//   return (
-//     <div>
-//       {restaurantsDetail.map(product => {
-//         return (
-//           <CardRestaurantDetail key={product.id}>
-//             <CardRestaurantDetailImage img src={product.photoUrl} />
-//             <CardRestaurantDetailData>
-//               <RestaurantDetailName>{product.name}</RestaurantDetailName>
-//               <RestaurantDetailDescription>{product.description}</RestaurantDetailDescription>
-//               <RestaurantDetailPrice>{product.price}</RestaurantDetailPrice>
-//               <ButtonAdd>adicionar</ButtonAdd>
-//             </CardRestaurantDetailData>
-//           </CardRestaurantDetail>
-//         )
-//       })}
-// =======
-  
-=======
-  const listDetailsOfRestaurants =
-    states.restaurantsDetail &&
-    states.restaurantsDetail.products.map((product) => {
-      return (
-        <CardRestaurantDetail key={product.id}>
-          <CardRestaurantDetailImage img src={product.photoUrl} />
-          <CardRestaurantDetailData>
-            <RestaurantDetailName>{product.name}</RestaurantDetailName>
-            <RestaurantDetailDescription>{product.description}</RestaurantDetailDescription>
-            <RestaurantDetailPrice>{product.price}</RestaurantDetailPrice>
-          </CardRestaurantDetailData>
-          <ButtonAdd>adicionar</ButtonAdd>
-        </CardRestaurantDetail>
-      )
-    })
->>>>>>> e45fccdfbd661866f73636570f977d41aea3bd10
 
   return (
     <div>
