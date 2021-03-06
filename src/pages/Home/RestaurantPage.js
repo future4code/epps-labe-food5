@@ -14,29 +14,33 @@ import GlobalStateContext from '../../contexts/GlobalStateContext'
 
 const RestaurantPage = () => {
   const { states, requests } = useContext(GlobalStateContext)
-
+  
   useProtectedPage()
 
   useEffect(() => {
     requests.restaurantDetails()
   }, [requests])
 
+  useEffect(() => {
+    requests.listRestaurants()
+  }, [requests])
 
-  const listDetailsOfRestaurants =
-    states.restaurantsDetail &&
-    states.restaurantsDetail.products.map((product) => {
-      return (
-        <CardRestaurantDetail key={product.id}>
-          <CardRestaurantDetailImage img src={product.photoUrl} />
-          <CardRestaurantDetailData>
-            <RestaurantDetailName>{product.name}</RestaurantDetailName>
-            <RestaurantDetailDescription>{product.description}</RestaurantDetailDescription>
-            <RestaurantDetailPrice>{product.price}</RestaurantDetailPrice>
-          </CardRestaurantDetailData>
-          <ButtonAdd>adicionar</ButtonAdd>
-        </CardRestaurantDetail>
-      )
-    })
+  const listDetailsOfRestaurants = 
+  states.restaurantsDetail &&
+  states.restaurantsDetail.map((product) => {
+    return (
+      <CardRestaurantDetail key={product.id}>
+        <CardRestaurantDetailImage img src={product.photoUrl} />
+        <CardRestaurantDetailData>
+          <RestaurantDetailName>{product.name}</RestaurantDetailName>
+          <RestaurantDetailDescription>{product.description}</RestaurantDetailDescription>
+          <RestaurantDetailPrice>{product.price}</RestaurantDetailPrice>
+        </CardRestaurantDetailData>
+        <ButtonAdd>adicionar</ButtonAdd>
+      </CardRestaurantDetail>
+    )
+  })
+
 
   return (
     <div>

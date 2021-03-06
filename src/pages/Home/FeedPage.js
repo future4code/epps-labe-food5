@@ -1,4 +1,4 @@
-import React, { useEffect, useContext} from 'react'
+import React, { useEffect, useContext } from 'react'
 import RestaurantCard from './RestaurantCard'
 import useProtectedPage from '../../hooks/useProtectedPage'
 import GlobalStateContext from '../../contexts/GlobalStateContext'
@@ -28,5 +28,3 @@ const FeedPage = () => {
 }
 
 export default FeedPage
-
-

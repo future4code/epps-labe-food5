@@ -10,10 +10,10 @@ const LoginPage = () => {
     const history = useHistory()  
   
     return (
-    <div onClick={() =>goToSignUp(history)}>
+    <div>
       <LoginForm />
       <PageTextContainer>
-        <TextButton >Não possui cadastro? Clique aqui.</TextButton>
+        <TextButton >Não possui cadastro? <span onClick={() =>goToSignUp(history)}>Clique aqui</span></TextButton>
       </PageTextContainer>
   
      </div>
