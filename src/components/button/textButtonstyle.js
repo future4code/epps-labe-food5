@@ -7,4 +7,9 @@ export const TextButton =styled.button`
   background-color: transparent;
   border-color: transparent;
   outline: none;
+
+  span {
+    color: blue;
+    cursor: pointer;
+  }
 `
