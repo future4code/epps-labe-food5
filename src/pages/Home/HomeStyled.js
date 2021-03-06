@@ -25,6 +25,7 @@ export const CardRestaurantDetail = styled.div`
     position: relative;
     width: 20.5rem;
     height: 7rem;
+
     margin: 0 auto;
     border: 1px solid black;
     border-radius: 15px;
@@ -46,7 +47,10 @@ export const ButtonAdd = styled.button`
     width: 5.625rem;
     height: 1.938rem;
     border-radius: 8px;
-    margin-left: 238px;
+    margin-left: 142px;
+    margin-bottom: 200px;  
+
+   // margin-left: 238px;
     margin-top: 80px;
 `
 

@@ -1,3 +1,4 @@
+
 import React, {useContext} from 'react'
 import {CardRestaurant, CardRestaurantImage, CardRestaurantData} from './HomeStyled'
 import GlobalStateContext from '../../contexts/GlobalStateContext'
@@ -8,6 +9,7 @@ const RestaurantCard = (props) => {
 
     return (
         <CardRestaurant onClick={() => requests.restaurantDetails(props.restaurants.id)}>
+      
             <CardRestaurantImage
             src={props.restaurants.logoUrl}
             alt={props.restaurants.name}
