@@ -19,7 +19,6 @@ const RestaurantPage = () => {
 
   const [restaurantsDetail, setRestaurantsDetail] = useState([])
 
-
   useEffect(() => {
     requests.restaurantDetails()
   }, [requests])
@@ -71,40 +70,7 @@ const RestaurantPage = () => {
 //         )
 //       })}
 // =======
-  useEffect(() => {
-    requests.restaurantDetails()
-  }, [requests])
-
-  const listOfRestaurants = 
-  states.restaurants &&
-  states.restaurants.map((restaurant) => {
-    return (
-      <div key={restaurant.id}>
-        <img src={restaurant.logoUrl} alt={restaurant.name} />
-        {restaurant.name}
-      </div>
-    )
-  })
-
-  useEffect(() => {
-    requests.listRestaurants()
-  }, [requests])
-
-  const listDetailsOfRestaurants = 
-  states.restaurantsDetail &&
-  states.restaurantsDetail.map((product) => {
-    return (
-      <CardRestaurantDetail key={product.id}>
-        <CardRestaurantDetailImage img src={product.photoUrl} />
-        <CardRestaurantDetailData>
-          <RestaurantDetailName>{product.name}</RestaurantDetailName>
-          <RestaurantDetailDescription>{product.description}</RestaurantDetailDescription>
-          <RestaurantDetailPrice>{product.price}</RestaurantDetailPrice>
-        </CardRestaurantDetailData>
-        <ButtonAdd>adicionar</ButtonAdd>
-      </CardRestaurantDetail>
-    )
-  })
+  
 
   return (
     <div>

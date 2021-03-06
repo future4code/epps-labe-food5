@@ -1,7 +1,7 @@
 
 
-import { useHistory } from 'react-router-dom'
-import {goToRestaurant} from '../../routes/Coordinator'
+// import { useHistory } from 'react-router-dom'
+// import {goToRestaurant} from '../../routes/Coordinator'
 
 import React, {useContext} from 'react'
 import {CardRestaurant, CardRestaurantImage, CardRestaurantData} from './HomeStyled'
@@ -14,8 +14,6 @@ const RestaurantCard = (props) => {
 //     return (
 //         <CardRestaurant onClick={() => goToRestaurant(history, props.restaurantId)}>
 
-
-    const { requests } = useContext(GlobalStateContext)
 
     return (
         <CardRestaurant onClick={() => requests.restaurantDetails(props.restaurants.id) || requests.listRestaurants(props.restaurants.id)}>

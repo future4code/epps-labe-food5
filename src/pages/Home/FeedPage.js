@@ -1,7 +1,7 @@
 
 //import React, { useContext, useEffect } from 'react'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import {baseUrl, token} from './Consts/Consts'
 
@@ -57,5 +57,5 @@ export default FeedPage
 //         })}
 //         </div>
 //     )
-}
+// }
 
