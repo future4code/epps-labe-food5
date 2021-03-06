@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import useProtectedPage from '../../hooks/useProtectedPage'
 import {Div, Boton, InfoDados, Pen, Header, AddressContainer, UserContainer, AddressSection, TextAddress, StreetAddress, HistoricRequests, ScreenContainer, Li} from './PageStyled'
 import { useHistory } from 'react-router-dom'
 
 const Profile = () => {
     const history = useHistory();
-    // AQUI DEVERIA VIR PROTECT PAGE
+    useProtectedPage()
     const [user, setUser] = useState ({})
     const [address, setAddress] = useState ('')
 

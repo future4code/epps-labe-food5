@@ -1,9 +1,10 @@
-
 import React, {useContext} from 'react'
 import {CardRestaurant, CardRestaurantImage, CardRestaurantData} from './HomeStyled'
+import useProtectedPage from '../../hooks/useProtectedPage'
 import GlobalStateContext from '../../contexts/GlobalStateContext'
 
 const RestaurantCard = (props) => {
+    useProtectedPage()
 
     const { requests } = useContext(GlobalStateContext)
 

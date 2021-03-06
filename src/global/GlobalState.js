@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
-import { baseUrl, token } from '../pages/Home/Constants/url'
+import { baseUrl } from '../Constants/url'
 import GlobalStateContext from '../contexts/GlobalStateContext'
 
 const GlobalState = (props) => {
@@ -9,6 +9,8 @@ const GlobalState = (props) => {
 
     const [restaurants, setRestaurants] = useState([])
     const [restaurantsDetail, setRestaurantsDetail] = useState([])
+
+    const token = localStorage.getItem('token')
 
     const listRestaurants = () => {
 
@@ -39,10 +41,6 @@ const GlobalState = (props) => {
                 console.log(err.data)
             })
     }
-
-//     const states = { restaurants, restaurantsDetail, form } 
-//     const setters = { setRestaurants, setRestaurantsDetail, setForm }
-//     const requests = { listRestaurants, restaurantDetails, CadAddress, newAddress }
 
     const states = { restaurants, restaurantsDetail }
     const setters = { setRestaurants, setRestaurantsDetail }
