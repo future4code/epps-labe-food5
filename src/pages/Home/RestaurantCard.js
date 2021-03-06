@@ -7,7 +7,7 @@ const RestaurantCard = (props) => {
     const { requests } = useContext(GlobalStateContext)
 
     return (
-        <CardRestaurant onClick={() => requests.restaurantDetails(props.restaurants.id) || requests.listRestaurants(props.restaurants.id)}>
+        <CardRestaurant onClick={() => requests.restaurantDetails(props.restaurants.id)}>
             <CardRestaurantImage
             src={props.restaurants.logoUrl}
             alt={props.restaurants.name}

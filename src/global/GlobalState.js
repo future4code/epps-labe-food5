@@ -32,8 +32,8 @@ const GlobalState = (props) => {
             }
         })
             .then((response) => {
-                setRestaurantsDetail(response.data.restaurant.products)
-                console.log(response.data.restaurant.products)
+                setRestaurantsDetail(response.data.restaurant)
+                console.log(response.data.restaurant)
                 history.push(`/restaurant/${restaurantId}`)
             }).catch((err) => {
                 console.log(err.data)

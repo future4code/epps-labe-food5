@@ -28,8 +28,7 @@ export const CardRestaurantDetail = styled.div`
     margin: 0 auto;
     border: 1px solid black;
     border-radius: 15px;
-    margin-bottom: 10px;
-
+    
 `
 
 export const CardRestaurantDetailImage = styled.img`
@@ -56,7 +55,7 @@ export const RestaurantDetailName = styled.p`
 `
 
 export const RestaurantDetailDescription = styled.p`
-
+    max-height: 10%;
 `
 
 export const RestaurantDetailPrice = styled.p`
