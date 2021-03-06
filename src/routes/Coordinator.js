@@ -11,17 +11,19 @@ export const goToRestaurant = (history, restaurantId) => {
     }
 
 export const goToSignUp = (history) => {
-        history.push("/sign-up")
-    }
+        history.push("/signUp")
+}
 
-export const goToPerfil = (history)=>{
-        history.push('/perfil')
+export const goToUserPage = (history)=>{
+        history.push('/user')
     }
 
 export const goToAdressPage = (history) => {
-        history.push ('/endereco')
+        history.push ('/address')
     }
 
 export const goToProfilePage = (history) =>{
-        history.push('/perfil')
+        history.push('/profile')
     }
+
+

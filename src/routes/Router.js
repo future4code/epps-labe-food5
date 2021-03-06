@@ -6,17 +6,39 @@ import FeedPage from '../pages/Home/FeedPage'
 import RestaurantPage from '../pages/Home/RestaurantPage'
 import ErrorPage from '../pages/Error/ErrorPage'
 
+import ProfileAddress from '../pages/Profile/ProfileAddress'
+import ProfileUser from '../pages/Profile/ProfileUser'
+import ProfilePage from '../pages/Profile/ProfilePage'
+
+//import GlobalState from '../global/GlobalState'
+
+import GlobalState from '../global/GlobalState'
+
+
 const Router = () => {
     return (
         <BrowserRouter>
+
             <Switch>
+                <Route exact path={'/'}>
+                    <LoginPage/>
+                </Route>
                 <Route exact path={'/login'}>
                     <LoginPage/>
                 </Route>
                 <Route exact path={'/signUp'}>
                     <SignUpPage />
                 </Route>
-                <Route exact path={'/'}>
+                <Route exact path={'/profile'}>
+                    <ProfilePage />
+                </Route>
+                <Route exact path={'/user'}>
+                    <ProfileUser />
+                </Route>
+                <Route exact path={'/address'}>
+                    <ProfileAddress />
+                </Route>
+                <Route exact path={'/feed'}>
                     <FeedPage />
                 </Route>
                 <Route exact path={'/restaurant/:restaurantId'}>
@@ -25,7 +47,29 @@ const Router = () => {
                 <Route>
                     <ErrorPage />
                 </Route>
+                
             </Switch>
+
+            <GlobalState>
+                <Switch>
+                    <Route exact path={'/login'}>
+                        <LoginPage />
+                    </Route>
+                    <Route exact path={'/signUp'}>
+                        <SignUpPage />
+                    </Route>
+                    <Route exact path={'/'}>
+                        <FeedPage />
+                    </Route>
+                    <Route exact path={'/restaurant/:restaurantId'}>
+                        <RestaurantPage />
+                    </Route>
+                    <Route>
+                        <ErrorPage />
+                    </Route>
+                </Switch>
+            </GlobalState>
+
         </BrowserRouter>
     )
 }
