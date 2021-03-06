@@ -5,12 +5,13 @@ import { Button, ThemeProvider } from '@material-ui/core';
 import { Campo, Div, FormAddre, H3, theme,ScreenContainer } from './AddressStyle';
 import { goToFeedPage } from '../../routes/Coordinator';
 import { useHistory } from 'react-router-dom'
-//import useProtectedPage from '../hooks/useProtectedPage';
+import useProtectedPage from '../../hooks/useProtectedPage'
 
 
 const ProfileAddress = () => {
-    //useProtectedPage()
+    useProtectedPage()
     const history = useHistory();
+
     //validação do usuário por meio do token//  
     useLayoutEffect(() => {
         if(localStorage.getItem("token") == null){
