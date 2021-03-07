@@ -3,7 +3,7 @@ import useForm from "../../hooks/useForm";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { baseUrl } from "../../Constants/url";
-// import { goToAdressPage } from "../../routes/Coordinator";
+import { goToAdressPage } from "../../routes/Coordinator";
 
 import {
   MainContainer,
@@ -32,7 +32,7 @@ const SignUpPage = () => {
     password: "",
     confirm_password: "",
   });
-  // const history = useHistory();
+  const history = useHistory();
 
   const signUp = (event) => {
     event.preventDefault();
@@ -46,13 +46,14 @@ const SignUpPage = () => {
     };
 
     if (form.password !== form.confirm_password) {
-      alert("Suas senhas não combinam, repita de novo!");
+      alert("Suas senhas não combinam!");
     } else {
       axios
         .post(`${baseUrl}/signup`, body)
         .then((response) => {
           console.log("Meu usuario: ", response.data.user);
           alert("Deu certo");
+          // goToAdressPage(history)
         })
         .catch((err) => {
           console.log("Meu Error: ", err);
