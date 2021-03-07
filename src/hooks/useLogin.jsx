@@ -5,6 +5,7 @@ import { baseUrl } from "../Constants/url";
 
 export default function useLogin() {
   const [form, onChange] = useForm({});
+
   const history = useHistory();
 
   const Login = (event) => {
@@ -14,6 +15,10 @@ export default function useLogin() {
       email: form.email,
       password: form.password,
     };
+
+    console.log(body)
+    console.log(form)
+    console.log(onChange)
 
     axios
       .post(`${baseUrl}/login`, body)

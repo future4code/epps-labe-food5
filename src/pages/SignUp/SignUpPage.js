@@ -1,9 +1,9 @@
 import React from "react";
-import useForm from '../../hooks/useForm'
-import { useHistory } from 'react-router-dom';
-import axios from 'axios'
-import {baseUrl} from '../../Constants/url'
-import { goToAdressPage } from '../../routes/Coordinator'
+import useForm from "../../hooks/useForm";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+import { baseUrl } from "../../Constants/url";
+// import { goToAdressPage } from "../../routes/Coordinator";
 
 import {
   MainContainer,
@@ -25,30 +25,41 @@ import { InputAdornment, TextField } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 
 const SignUpPage = () => {
-  const [form, handleInputChange] = useForm({ name: '', email: '', cpf: '', password: '' })
-  const history = useHistory()
+  const [form, onChange] = useForm({
+    name: "",
+    email: "",
+    cpf: "",
+    password: "",
+    confirm_password: "",
+  });
+  // const history = useHistory();
 
   const signUp = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     const body = {
       name: form.name,
       email: form.email,
       cpf: form.cpf,
-      password: form.password
-    }
+      password: form.password,
+      confirm_password: form.confirm_password,
+    };
 
-    axios.post(`${baseUrl}/signup`, body, {
-    })
-      .then((response) => {
-        console.log(response.data.user)
-        goToAdressPage(history)
-        alert("Deu certo")
-      }).catch((err) => {
-        console.log(err.response)
-        alert("Email ou CPF já cadastrado")
-      })
-  }
+    if (form.password !== form.confirm_password) {
+      alert("Suas senhas não combinam, repita de novo!");
+    } else {
+      axios
+        .post(`${baseUrl}/signup`, body)
+        .then((response) => {
+          console.log("Meu usuario: ", response.data.user);
+          alert("Deu certo");
+        })
+        .catch((err) => {
+          console.log("Meu Error: ", err);
+          alert("Email ou CPF já cadastrado");
+        });
+    }
+  };
 
   return (
     <form onSubmit={signUp}>
@@ -66,8 +77,9 @@ const SignUpPage = () => {
           <TextField
             variant="outlined"
             value={form.name}
-            onChange={handleInputChange}
-            name={'name'}
+            type="text"
+            onChange={onChange}
+            name={"name"}
             required="true"
             label="Nome"
             placeholder="Nome e Sobrenome"
@@ -76,9 +88,9 @@ const SignUpPage = () => {
           <TextField
             variant="outlined"
             value={form.email}
-            type={'email'}
-            onChange={handleInputChange}
-            name={'email'}
+            type="email"
+            onChange={onChange}
+            name={"email"}
             required="true"
             label="E-mail"
             placeholder="email@email.com"
@@ -88,9 +100,9 @@ const SignUpPage = () => {
           <TextField
             variant="outlined"
             value={form.cpf}
-            onChange={handleInputChange}
-            name={'cpf'}
-            type={'cpf'}
+            onChange={onChange}
+            name={"cpf"}
+            type="text"
             required="true"
             label="CPF"
             placeholder="000.000.000-00"
@@ -100,9 +112,9 @@ const SignUpPage = () => {
           <TextField
             variant="outlined"
             value={form.password}
-            name={'password'}
-            onChange={handleInputChange}
-            type={'password'}
+            name={"password"}
+            onChange={onChange}
+            type="password"
             required="true"
             label="Senha"
             placeholder="Mínimo 6 caracteres"
@@ -118,10 +130,10 @@ const SignUpPage = () => {
 
           <TextField
             variant="outlined"
-            value={form.password}
-            onChange={handleInputChange}
-            name={'password'}
-            type={'password'}
+            value={form.confirm_password}
+            onChange={onChange}
+            name={"confirm_password"}
+            type="password"
             required="true"
             label="Confirmar"
             placeholder="Confirme a senha anterior"
@@ -135,9 +147,7 @@ const SignUpPage = () => {
             }}
           />
           <BoxButton>
-            <Button>
-              Criar
-              </Button>
+            <Button>Criar</Button>
           </BoxButton>
         </Form>
       </MainContainer>
@@ -146,5 +156,3 @@ const SignUpPage = () => {
 };
 
 export default SignUpPage;
-
-
