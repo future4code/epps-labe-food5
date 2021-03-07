@@ -21,10 +21,10 @@ const LoginForm = () => {
             <InputText 
             name='email'
             value={form.email}
-            placeholder= 'email@email.com'
-            onChange={onChange}
+            placeholder='email@email.com'
+            onChange={() => onChange}
             label='E-mail'
-            type={'email'}
+            type='email'
             required
             autoFocus
             />
@@ -34,9 +34,9 @@ const LoginForm = () => {
             <InputPass 
             name='password'
             value={form.password}
-            placeholder= 'Mínimo 6 caracteres'
-            onChange={onChange}
-            type={"password"}
+            placeholder='Mínimo 6 caracteres'
+            onChange={() => onChange}
+            type="password"
             require
             />
             <PasswordIconImg src={Visible}/>
