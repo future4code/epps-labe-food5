@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Paper from '@material-ui/core/Paper';
 
 export const CardRestaurant = styled.div`
     width: 20.5rem;
@@ -64,4 +65,18 @@ export const RestaurantDetailDescription = styled.p`
 
 export const RestaurantDetailPrice = styled.p`
 
+`
+export const Button =styled.button`
+
+border:none;
+outline-style: none;
+font-weight:bolder;
+background-color:white;
+margin: 6px;
+text-align:center;
+
+
+`
+export const StyledPaper = styled(Paper)`
+margin:20px;
 `

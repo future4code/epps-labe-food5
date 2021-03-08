@@ -9,6 +9,8 @@ const GlobalState = (props) => {
 
     const [restaurants, setRestaurants] = useState([])
     const [restaurantsDetail, setRestaurantsDetail] = useState([])
+    const [search, setSearch] = useState('')
+    const [filteredRestaurants, setFilteredRestaurants] = useState([])
 
     const token = localStorage.getItem('token')
 
@@ -42,8 +44,9 @@ const GlobalState = (props) => {
             })
     }
 
-    const states = { restaurants, restaurantsDetail }
-    const setters = { setRestaurants, setRestaurantsDetail }
+
+    const states = { restaurants, restaurantsDetail, search, filteredRestaurants, setSearch }
+    const setters = { setRestaurants, setRestaurantsDetail, setFilteredRestaurants }
     const requests = { listRestaurants, restaurantDetails }
 
     const data = { states, setters, requests }
